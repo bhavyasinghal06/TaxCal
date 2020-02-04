@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Income Tax Calculator</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        body:before{
+            content: '';
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+          
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-filter: blur(2px);
+            -moz-filter: blur(2px);
+            -o-filter: blur(2px);
+            -ms-filter: blur(2px);
+            filter: blur(2px);
+        }
+        .submit-form
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 400px;
+            height: 300px;
+            padding: 80px 40px;
+            box-sizing: border-box;
+            background: rgba(0,0,0,.5);
+        }
+        .avatar {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            top: calc(-80px/2);
+            left: calc(50% - 40px);
+        }
+        .submit-form h2 {
+            margin: 0;
+            padding: 0 0 20px;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .submit-form p
+        {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            color: #fff;
+        }
+        .submit-form input
+        {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .submit-form input[type="text"],
+        .submit-form input[type="password"]
+        {
+            border: none;
+            border-bottom: 1px solid #fff;
+            background: transparent;
+            outline: none;
+            height: 40px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .submit-form input[type="submit"] {
+            height: 30px;
+            color: #fff;
+            font-size: 15px;
+            background: red;
+            cursor: pointer;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            margin-top: 15%;
+        }
+        .submit-form a
+        {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        input[type="checkbox"] {
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+        <img class="mySlides" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9qV3A2MpRf5VZC2yVaZ7uSZiONiTD5MISMLQTZATxlJHFeMwC" height="820px" width="1600px">
+        <img class="mySlides" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRI30nbWZMJ3jlHVBh3NwgJBh5ON2AesDKR5ZSHoGgfz-rgu1bg" height=1200px width="1600px">
+        <img class="mySlides" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6Np-JvpIWTWkdXXd7blFGkeT82xqrkQqT7BZquiNPL1WSyKe1" height="1000px" width="1550px">
+        
+    <div class="submit-form" >
+           
+        <h2>Calculator</h2>
+        <script>
+       
+        var slideIndex = 0;
+        carousel();
+        
+        function carousel() {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          slideIndex++;
+          if (slideIndex > x.length) {slideIndex = 1}
+          x[slideIndex-1].style.display = "block";
+          setTimeout(carousel, 5000); 
+        }
+        
+            
+            var year =localStorage.getItem('year');
+            var sal = localStorage.getItem('sal');
+            var hra = localStorage.getItem('hra');
+            var tr= localStorage.getItem('tr');
+            var r = localStorage.getItem('r');
+            var c = localStorage.getItem('c');
+            var d= localStorage.getItem('d');
+            var sp= localStorage.getItem('sp');
+            var t= localStorage.getItem('t');
+            var o= localStorage.getItem('o');
+
+            var y=(r - 0.1*sal);
+            var z=hra-y;
+            var deduction=parseInt(c)+parseInt(d)+parseInt(t)+parseInt(tr);
+            var net=parseInt(sal)+parseInt(z)+parseInt(sp)-300000+parseInt(o);
+            var res=net-deduction;
+            var x;
+            if(res<250000)
+            {
+                x=parseInt(0);
+            }
+            else if(res>250000 && res<500000)
+            {
+                x=parseInt(0.05*res);
+            }
+            else if(res>500000&&res<1000000)
+            {
+                x=parseInt(12500)+parseInt(0.2*res);
+            }
+            else if(res>1000000)
+            {
+               x=parseInt(112500)+parseInt(0.3*res);
+            }
+            var tax=parseInt(x)+parseInt(0.04*x);
+            if(res<0)
+            {
+                res=0;
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Net taxable income for " + year + " is <\/span>");
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Rupees " +res  + " only <\/span>");
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Tax deducted for " + year + " is <\/span>");
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Rupees " + tax + " only <\/span>");
+            }
+            else{
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Net taxable income for " + year + " is <\/span>");
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Rupees " + res + " only <\/span>");
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Tax deducted for " + year + " is <\/span>");
+            document.write("<span style=\"color: #fff;font-size: .85em; font-family:helvetica, sans-serif;\">Rupees " + tax + " only <\/span>");
+            }
+            
+            //document.write(x);
+            localStorage.removeItem('sal');
+            localStorage.removeItem('year');
+            localStorage.removeItem('person');
+            localStorage.removeItem('r');
+            localStorage.removeItem('hra');
+            localStorage.removeItem('t');
+            localStorage.removeItem('o');
+            localStorage.removeItem('c');
+            localStorage.removeItem('sp');
+            localStorage.removeItem('d');
+           
+             </script>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Income Tax Calculator</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        body:before{
+            content: '';
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+           
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-filter: blur(2px);
+            -moz-filter: blur(2px);
+            -o-filter: blur(2px);
+            -ms-filter: blur(2px);
+            filter: blur(2px);
+         
+            
+
+        }
+        .submit-form
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 400px;
+            height: 890px;
+            padding: 80px 40px;
+            box-sizing: border-box;
+            background: rgba(0,0,0,.5);
+        }
+        .avatar {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            top: calc(-80px/2);
+            left: calc(50% - 40px);
+        }
+        .submit-form h2 {
+            margin: 0;
+            padding: 0 0 20px;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .submit-form h3 {
+            margin: 0;
+          
+            color: #fff;
+            
+            font:italic;
+        }
+        .submit-form p
+        {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            color: #fff;
+        }
+        .submit-form input
+        {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .submit-form input[type="text"],
+        .submit-form input[type="password"]
+        {
+            border: none;
+            border-bottom: 1px solid #fff;
+            background: transparent;
+            outline: none;
+            height: 40px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .submit-form input[type="submit"] {
+            height: 30px;
+            color: #fff;
+            font-size: 15px;
+            background: red;
+            cursor: pointer;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            margin-top: 15%;
+        }
+        h3.italic {
+          font-style: italic;
+         }
+         p.italic {
+          font-style: italic;
+          font-weight: 100;
+         }
+        
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color:grey;
+        color:black;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+
+        /* Position the tooltip text */
+        position: absolute;;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+
+        /* Fade in tooltip */
+        opacity: 0;
+        transition: opacity 0.3s;
+        }
+
+        /* Tooltip arrow */
+        .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: white transparent transparent transparent;
+        }
+        .tooltip {
+  position: relative;
+  display: inline-block;
+  color:white;
+  font-weight: bold;
+}
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+        }
+                .submit-form a
+                {
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-decoration: none;
+                }
+                
+                .submit-form button
+                {
+                    color:blue;
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-decoration: none;
+                }
+                input[type="checkbox"] {
+                    width: 20%;
+                }
+    </style>
+</head>
+<body>
+        
+        <img class="mySlides" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9qV3A2MpRf5VZC2yVaZ7uSZiONiTD5MISMLQTZATxlJHFeMwC" height="820px" width="1600px">
+        <img class="mySlides" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRI30nbWZMJ3jlHVBh3NwgJBh5ON2AesDKR5ZSHoGgfz-rgu1bg" height=990px width="1600px">
+        <img class="mySlides" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ6Np-JvpIWTWkdXXd7blFGkeT82xqrkQqT7BZquiNPL1WSyKe1" height="1000px" width="1550px">
+        <script>
+        var slideIndex = 0;
+        carousel();
+        
+        function carousel() {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          slideIndex++;
+          if (slideIndex > x.length) {slideIndex = 1}
+          x[slideIndex-1].style.display = "block";
+          setTimeout(carousel, 5000); 
+        }
+        </script>
+    <div class="submit-form" >
+        <form action="second.html">
+        <h3 class="italic">User Manual</h3>
+        <button type="submit">Click here</button>    
+        </form>
+        <h2>Calculator</h2>
+        <p class="italic">Note:Hover over headings for info</p>
+
+            <form action="divide2.html" method="POST" onSubmit="get()">
+                <div class="tooltip">Financial Year
+                    <span  class="tooltiptext">Year for which taxes are to be calculated.</span>
+                    <input id="year_" type="number" name="year">
+                </div>
+                <div class="tooltip">Salary
+                        <span class="tooltiptext">Annual Basic Salary</span>
+                        <input id="sal_" type="number" name="sal">
+                </div>
+                <div class="tooltip">HRA
+                        <span class="tooltiptext">House Rent Allowance provided by organization</span>
+                        <input id="hra_" type="number" name="hra">
+                </div>
+                <div class="tooltip">Rent
+                        <span class="tooltiptext">Annual rent paid by user</span>
+                        <input id="r_" type="number" name="r" >
+                </div>
+                <div class="tooltip">Travel Allowance given by organization
+                        <span class="tooltiptext">Travel Allowance</span>
+                        <input id="tr_" type="number" name="tr" >
+                </div>
+                <div class="tooltip">Special Allowance
+                        <span class="tooltiptext">Other allowances such as Travel Allowance,etc.</span>
+                        <input id="sp_" type="number" name="sp">
+                </div>
+                <div class="tooltip">Income From other sources
+                        <span class="tooltiptext">Income other than main</span>
+                        <input id="o_" type="number" name="o">
+
+                </div>
+                <div class="tooltip">80C
+                        <span class="tooltiptext">PPF/ELSS(Max limit is 1.5 lacs)</span>
+                        <input id="c_" type="number" name="c">
+                </div>
+                <div class="tooltip">80D
+                        <span class="tooltiptext">health insurance(max limit is 25,000 for self and for parents 50,000)</span>
+                        <input id="d_" type="number" name="d">
+                </div>
+                <div class="tooltip">80TTA
+                        <span class="tooltiptext">interest from saving account(max limit is 10,000)</span>
+                        <input id="t_" type="number" name="t">    
+                </div>
+                
+                <input type="submit" value="Submit" onsubmit="get()"/>
+         
+            <script>
+               
+                function get() {
+                   
+                    localStorage.setItem('year', document.getElementById('year_').value);
+                    localStorage.setItem('sal', document.getElementById('sal_').value);
+                    localStorage.setItem('hra', document.getElementById('hra_').value);
+                    localStorage.setItem('r', document.getElementById('r_').value);
+                    localStorage.setItem('tr', document.getElementById('tr_').value);
+                    localStorage.setItem('sp', document.getElementById('sp_').value);
+                    localStorage.setItem('c', document.getElementById('c_').value);
+                    localStorage.setItem('d', document.getElementById('d_').value);
+                    localStorage.setItem('t', document.getElementById('t_').value);
+                    localStorage.setItem('o', document.getElementById('o_').value);
+                }
+            </script>
+
+
+        </form>
+        
+    </div>
+</body>
+</html>
